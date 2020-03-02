@@ -3,6 +3,12 @@
 var productImage = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','usb.gif','water-can.jpg','wine-glass.jpg'];
 var productObject = [];
 var numClick = 0;
+var counter =[];
+var shown = [];
+var imgClick;
+var countClickImage = 0;
+var imageName=[];
+
 
 
 // functions
@@ -12,11 +18,11 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-
 // constructor function
 function Product(typeProduct){
   this.typeProduct = typeProduct;
-  this.nameProduct = typeProduct.split('.')[0];
+  this.name = typeProduct.split('.')[0];
+  imageName.push(this.name);
   this.urlProduct = `img/${this.typeProduct}`;
   productObject.push(this);
 }
@@ -24,52 +30,58 @@ for (var i=0;i<productImage.length;i++){
   new Product(productImage[i]);
 }
 
+
+
+
 // DOM
+intialData();
 var leftImage= document.getElementById('leftImage');
 var rightImage = document.getElementById('rightImage');
 var centerImage = document.getElementById('centerImage');
-var randomNumber = getRandomInt(0,productObject.length-1);
+var idImages = [leftImage,rightImage,centerImage];
+var intRandomNumber=[];
+
+// function generate random number
+function generateRandomNumber(){
+  var randomNumber = getRandomInt(0,productObject.length-1);
+  while(intRandomNumber.includes(randomNumber))
+  {randomNumber = getRandomInt(0,productObject.length-1);
+  }
+  intRandomNumber.push(randomNumber);
+  return randomNumber;
+}
+//funtion for create Image
+function createImage(image){
+  var newRandomArray = generateRandomNumber();
+  image.setAttribute('src', productObject[newRandomArray].urlProduct);
+  image.setAttribute('alt',productObject[newRandomArray].typeProduct);
+  image.setAttribute('id',newRandomArray);
+}
 //funtion for render
 function render(){
-  while(((leftImage.alt === rightImage.alt) || (leftImage.alt === centerImage.alt)) || (rightImage.alt=== centerImage.alt)){
-    leftImage.setAttribute('src', productObject[randomNumber].urlProduct);
-    leftImage.setAttribute('alt',productObject[randomNumber].typeProduct);
-    randomNumber = getRandomInt(0,productObject.length);
-    rightImage.setAttribute('src', productObject[randomNumber].urlProduct);
-    rightImage.setAttribute('alt',productObject[randomNumber].typeProduct);
-    randomNumber = getRandomInt(0,productObject.length);
-    centerImage.setAttribute('src', productObject[randomNumber].urlProduct);
-    centerImage.setAttribute('alt',productObject[randomNumber].typeProduct);
-  }}
-render();
-// counter and showen
-var counter =[];
-var shown = [];
-console.log(counter);
-for (var r=0;r<productObject.length;r++){
-  counter.push(0);
-  shown.push(0);
+  for (var i=0;i<idImages.length;i++){
+    createImage(idImages[i]);
+  }
 }
 
-for(var k=0;k<productObject.length;k++){
-  if (productObject[k].typeProduct===leftImage.alt){
-    shown[k] +=1;
+render();
+// counter and showen
+
+function intialData(){
+  for (var r=0;r<productObject.length;r++){
+    counter.push(0);
+    shown.push(0);
   }
-  else if (productObject[k].typeProduct===rightImage.alt){
-    shown[k] +=1;
-  }
-  else if (productObject[k].typeProduct===centerImage.alt){
-    shown[k] +=1;
-  }}
+  imgClick = document.getElementById('allImage');
+  imgClick.addEventListener('click',onClick);
+}
 
 // event
 // var imgClick = document.getElementsByTagName('img');
 // for (var l=0; l<imgClick.length;l++){
 //   imgClick[l].addEventListener('click',onClick);}
 
-// another solution
-var imgClick = document.getElementById('allImage');
-imgClick.addEventListener('click',onClick);
+
 
 //function of event
 function onClick(event){
@@ -83,44 +95,44 @@ function onClick(event){
       var unorder = document.getElementById('list');
       var list = document.createElement('li');
       unorder.appendChild(list);
-      list.textContent= `${productObject[li].nameProduct} had ${counter[li]} votes and was shown ${shown[li]} times.`;}
+      list.textContent= `${productObject[li].name} had ${counter[li]} votes and was shown ${shown[li]} times.`;}
+    barChart();
   }
   else{
-    randomNumber = getRandomInt(0,productObject.length);
-    leftImage.setAttribute('src', productObject[randomNumber].urlProduct);
-    leftImage.setAttribute('alt',productObject[randomNumber].typeProduct);
-    randomNumber = getRandomInt(0,productObject.length);
-    rightImage.setAttribute('src', productObject[randomNumber].urlProduct);
-    rightImage.setAttribute('alt',productObject[randomNumber].typeProduct);
-    randomNumber = getRandomInt(0,productObject.length);
-    centerImage.setAttribute('src', productObject[randomNumber].urlProduct);
-    centerImage.setAttribute('alt',productObject[randomNumber].typeProduct);
-    while(((leftImage.alt === rightImage.alt) || (leftImage.alt === centerImage.alt)) || (rightImage.alt=== centerImage.alt)){
-      leftImage.setAttribute('src', productObject[randomNumber].urlProduct);
-      leftImage.setAttribute('alt',productObject[randomNumber].typeProduct);
-      randomNumber = getRandomInt(0,productObject.length);
-      rightImage.setAttribute('src', productObject[randomNumber].urlProduct);
-      rightImage.setAttribute('alt',productObject[randomNumber].typeProduct);
-      randomNumber = getRandomInt(0,productObject.length);
-      centerImage.setAttribute('src', productObject[randomNumber].urlProduct);
-      centerImage.setAttribute('alt',productObject[randomNumber].typeProduct);
+    shown[leftImage.id]++;
+    shown[rightImage.id]++;
+    shown[centerImage.id]++;
+    if(countClickImage === 2){
+      countClickImage= 0;
+      intRandomNumber = [];
     }
-  }
-
-  //counter
-  for(var k=0;k<productObject.length;k++){
-    if (event.target.alt===productObject[k].typeProduct){
-      counter[k] += 1;
-    }
-    if (productObject[k].typeProduct===leftImage.alt){
-      shown[k] +=1;
-    }
-    else if (productObject[k].typeProduct===rightImage.alt){
-      shown[k] +=1;
-    }
-    else if (productObject[k].typeProduct===centerImage.alt){
-      shown[k] +=1;
-    }
+    countClickImage++;
+    render();
+    var index = event.target.id;
+    counter[index]++;
   }
 }
+
+// The type of chart we want to create is bar
+function barChart(){
+  var placeOfChart = document.getElementById('chart').getContext('2d');
+  var chart = new Chart(placeOfChart, {
+    type: 'bar',
+    data: {
+      labels: imageName,
+      datasets: [{
+        label: 'Number of view',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: shown
+      }
+      ,{label: 'Number of votes',
+        backgroundColor: 'rgb(155, 99, 132)',
+        borderColor: 'rgb(155, 99, 132)',
+        data: counter}
+      ]
+    },
+    options: {}
+  });}
+
 
