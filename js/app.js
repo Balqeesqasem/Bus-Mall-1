@@ -16,15 +16,13 @@ function getRandomInt(min, max) {
 // constructor function
 function Product(typeProduct){
   this.typeProduct = typeProduct;
+  this.nameProduct = typeProduct.split('.')[0];
   this.urlProduct = `img/${this.typeProduct}`;
   productObject.push(this);
 }
 for (var i=0;i<productImage.length;i++){
   new Product(productImage[i]);
 }
-
-
-
 
 // DOM
 var leftImage= document.getElementById('leftImage');
@@ -85,7 +83,7 @@ function onClick(event){
       var unorder = document.getElementById('list');
       var list = document.createElement('li');
       unorder.appendChild(list);
-      list.textContent= `${productObject[li].typeProduct} had ${counter[li]} votes and was shown ${shown[li]} times.`;}
+      list.textContent= `${productObject[li].nameProduct} had ${counter[li]} votes and was shown ${shown[li]} times.`;}
   }
   else{
     randomNumber = getRandomInt(0,productObject.length);
@@ -108,18 +106,14 @@ function onClick(event){
       centerImage.setAttribute('alt',productObject[randomNumber].typeProduct);
     }
   }
-  //counter
 
+  //counter
   for(var k=0;k<productObject.length;k++){
     if (event.target.alt===productObject[k].typeProduct){
-      console.log('tell me '+(event.target.alt===productObject[k].typeProduct));
       counter[k] += 1;
     }
-
     if (productObject[k].typeProduct===leftImage.alt){
       shown[k] +=1;
-      console.log(productObject[k].typeProduct+ ' ad '+k);
-      console.log(shown[k]+ ' ad '+k);
     }
     else if (productObject[k].typeProduct===rightImage.alt){
       shown[k] +=1;
