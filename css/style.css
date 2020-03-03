@@ -37,9 +37,10 @@ h2#result {
 }
 canvas#chart {
     position: absolute;
-    width:1000px !important;
-  height:1000px !important;
+    width: 700px !important;
+    height: 700px !important;
     top: 755px;
+    left: 228px;
 }
 #container {
     position: relative;
