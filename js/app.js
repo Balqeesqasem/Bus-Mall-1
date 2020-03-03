@@ -52,10 +52,10 @@ function generateRandomNumber(){
 }
 //funtion for create Image
 function createImage(image){
-  var newRandomArray = generateRandomNumber();
-  image.setAttribute('src', productObject[newRandomArray].urlProduct);
-  image.setAttribute('alt',productObject[newRandomArray].typeProduct);
-  image.setAttribute('id',newRandomArray);
+  var newRandomNumbe = generateRandomNumber();
+  image.setAttribute('src', productObject[newRandomNumbe].urlProduct);
+  image.setAttribute('alt',productObject[newRandomNumbe].typeProduct);
+  image.setAttribute('id',newRandomNumbe);
 }
 //funtion for render
 function render(){
@@ -102,10 +102,12 @@ function onClick(event){
     shown[leftImage.id]++;
     shown[rightImage.id]++;
     shown[centerImage.id]++;
-    if(countClickImage === 2){
+    if(countClickImage === 5){
       countClickImage= 0;
       intRandomNumber = [];
     }
+
+    console.log(intRandomNumber);
     countClickImage++;
     render();
     var index = event.target.id;
