@@ -110,13 +110,13 @@ function renderList(){
     list.textContent= `${productObject[li].name} had ${productObject[li].counter} votes and was shown ${productObject[li].shown} times.`;}
   set();
 }
-// function renderListPrevious(){
-//   for (var li=0;li<productObject.length;li++){
-//     var unorder = document.getElementById('list2');
-//     var list = document.createElement('li');
-//     unorder.appendChild(list);
-//     list.textContent= `${productObject[li].name} had ${productObject[li].counter} votes and was shown ${productObject[li].shown} times.`;}
-// }
+function renderListPrevious(){
+  for (var li=0;li<productObject.length;li++){
+    var unorder = document.getElementById('list2');
+    var list = document.createElement('li');
+    unorder.appendChild(list);
+    list.textContent= `${productObject[li].name} had ${productObject[li].counter} votes and was shown ${productObject[li].shown} times.`;}
+}
 
 
 //function of event
@@ -187,7 +187,8 @@ function get(){
   if(set1 !== null) {
     console.log('hi');
     productObject = JSON.parse(set1);
-    renderList();
+    // renderList();
+    renderListPrevious();
   }
 }
 get();
