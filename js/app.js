@@ -147,7 +147,7 @@ function onClick(event){
     render();
   }
 }
-
+//test
 // The type of chart we want to create is bar
 function barChart(){
   var placeOfChart = document.getElementById('chart').getContext('2d');
