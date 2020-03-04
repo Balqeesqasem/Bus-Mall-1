@@ -60,7 +60,6 @@ function generateRandomNumber(){
       intRandomNumber = [];
     }
     console.log('which I want '+ testArray);
-    console.log('the counter '+countClickImage);
     while(testArray.includes(randomNumber) || intRandomNumber.includes(randomNumber)){
       randomNumber = getRandomInt(0,productObject.length-1);
     }
