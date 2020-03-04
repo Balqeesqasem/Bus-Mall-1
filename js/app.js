@@ -12,7 +12,6 @@ var leftImageObject;
 var rightImageObject;
 var testArray;
 var testCount= 0;
-
 // functions
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -42,9 +41,7 @@ intialData();
 var leftImage= document.getElementById('leftImage');
 var rightImage = document.getElementById('rightImage');
 var centerImage = document.getElementById('centerImage');
-// var idImages = [leftImage,rightImage,centerImage];
 var intRandomNumber=[];
-
 // function generate random number
 function generateRandomNumber(){
   var randomNumber = getRandomInt(0,productObject.length-1);
@@ -112,13 +109,13 @@ function renderList(){
     list.textContent= `${productObject[li].name} had ${productObject[li].counter} votes and was shown ${productObject[li].shown} times.`;}
   set();
 }
-function renderListPrevious(){
-  for (var li=0;li<productObject.length;li++){
-    var unorder = document.getElementById('list2');
-    var list = document.createElement('li');
-    unorder.appendChild(list);
-    list.textContent= `${productObject[li].name} had ${productObject[li].counter} votes and was shown ${productObject[li].shown} times.`;}
-}
+// function renderListPrevious(){
+//   for (var li=0;li<productObject.length;li++){
+//     var unorder = document.getElementById('list2');
+//     var list = document.createElement('li');
+//     unorder.appendChild(list);
+//     list.textContent= `${productObject[li].name} had ${productObject[li].counter} votes and was shown ${productObject[li].shown} times.`;}
+// }
 
 
 //function of event
@@ -147,7 +144,6 @@ function onClick(event){
     console.log(intRandomNumber);
     countClickImage++;
     render();
-
   }
 }
 //test
@@ -186,7 +182,11 @@ function set(){
 
 function get(){
   var set1 = localStorage.getItem('set1');
-  productObject =JSON.parse(set1);
-  renderListPrevious();
+  console.log(set1);
+  if(set1 !== null) {
+    console.log('hi');
+    productObject = JSON.parse(set1);
+    renderList();
+  }
 }
 get();
