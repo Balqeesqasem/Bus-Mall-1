@@ -56,8 +56,8 @@ canvas#chart {
     position: absolute;
     width: 559px !important;
     height: 559px!important;
-    top: 590px;
-    left: 489px;
+    top: 995px;
+    left: 25%;
 }
 #container {
     position: relative;
