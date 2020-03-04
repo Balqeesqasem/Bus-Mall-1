@@ -27,36 +27,55 @@ h2#choice {
     position: absolute;
     text-align: -webkit-center;
     padding: 15px 0 0 31px;
-    left: 580px;
+    left: 464px;
+    top: 109px;
+    z-index: 100;
 }
 h2#result {
     position: absolute;
     font-size: 30px;
     text-align: -webkit-center;
     padding: 15px 0 0 31px;
+    z-index: 100;
+    top: 416px;
+}
+h2#pervious {
+    font-size: 30px;
+    padding: 0 0 20px 10px;
+    position: absolute;
+    top: 433px;
+    left: 589px;
+}
+ul#list2 {
+    position: absolute;
+    top: 473px;
+    left: 589px;
+    border: solid;
 }
 canvas#chart {
     position: absolute;
-    width: 700px !important;
-    height: 700px !important;
-    top: 755px;
-    left: 228px;
+
+    width: 650px !important;
+    height: 650px!important;
+    top: 978px;
+    left: 281px;
+
 }
 #container {
     position: relative;
     background-color: #FFCA51;
+    height: 312px;
 }
 #allImage {
     position: absolute;
-    left: 600px;
-    top: 58px;
+    left: 340px;
+    top: 64px;
 }
 #side {
-    position: absolute;
     position: absolute;
     border: solid;
     padding: 0;
     margin: 0;
-    left: 59px;
-    top: 64px;
+    left: 14px;
+    top: 364px;
 }
