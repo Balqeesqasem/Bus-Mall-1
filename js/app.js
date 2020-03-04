@@ -106,6 +106,7 @@ function renderList(){
     var unorder = document.getElementById('list');
     var list = document.createElement('li');
     unorder.appendChild(list);
+    list.innerHTML = '';
     list.textContent= `${productObject[li].name} had ${productObject[li].counter} votes and was shown ${productObject[li].shown} times.`;}
   set();
 }

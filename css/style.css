@@ -54,12 +54,10 @@ ul#list2 {
 }
 canvas#chart {
     position: absolute;
-
-    width: 650px !important;
-    height: 650px!important;
-    top: 978px;
-    left: 281px;
-
+    width: 559px !important;
+    height: 559px!important;
+    top: 590px;
+    left: 489px;
 }
 #container {
     position: relative;
