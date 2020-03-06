@@ -27,7 +27,7 @@ h2#choice {
     position: absolute;
     text-align: -webkit-center;
     padding: 15px 0 0 31px;
-    left: 464px;
+    left: 742px;
     top: 109px;
     z-index: 100;
 }
@@ -66,8 +66,8 @@ canvas#chart {
 }
 #allImage {
     position: absolute;
-    left: 340px;
-    top: 64px;
+    left: 48%;
+    top: 18%;
 }
 #side {
     position: absolute;
